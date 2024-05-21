@@ -1,29 +1,30 @@
-package main // This is the main entry point (package main)
 
-import (
-	"fmt"
-	"math"
-)
+// package main // This is the main entry point (package main)
 
-func main(){
+// import (
+// 	"fmt"
+// 	"math"
+// )
 
-	const inflationRate = 2.5 // Can not be reassigned
-	// Assigning type explicitly to override inferred value
-	var investmentAmount float64
-	expectedReturnRate := 5.5 
-	var years float64
+// func main(){
 
-	fmt.Print("Investment amount: ")
-	fmt.Scan(&investmentAmount)
+// 	const inflationRate = 2.5 // Can not be reassigned
+// 	// Assigning type explicitly to override inferred value
+// 	var investmentAmount float64
+// 	expectedReturnRate := 5.5 
+// 	var years float64
 
-	fmt.Print("Expected return rate: ")
-	fmt.Scan(&expectedReturnRate)
+// 	fmt.Print("Investment amount: ")
+// 	fmt.Scan(&investmentAmount)
 
-	fmt.Print("Years to invest: ")
-	fmt.Scan(&years)
+// 	fmt.Print("Expected return rate: ")
+// 	fmt.Scan(&expectedReturnRate)
 
-	futureValue := investmentAmount * math.Pow(1 + expectedReturnRate/100, years)
-	futureRealValue := investmentAmount * math.Pow(1 + inflationRate/100, years)
-    fmt.Print(`The investment return is: `, futureValue, "\n")
-	fmt.Print(`The real value after inflation: `, futureRealValue)
-}
+// 	fmt.Print("Years to invest: ")
+// 	fmt.Scan(&years)
+
+// 	futureValue := investmentAmount * math.Pow(1 + expectedReturnRate/100, years)
+// 	futureRealValue := investmentAmount * math.Pow(1 + inflationRate/100, years)
+//     fmt.Print(`The investment return is: `, futureValue, "\n")
+// 	fmt.Print(`The real value after inflation: `, futureRealValue)
+// }
