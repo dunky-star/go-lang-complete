@@ -9,15 +9,17 @@ func main(){
 
 	const inflationRate = 2.5 // Can not be reassigned
 	// Assigning type explicitly to override inferred value
-	var investmentAmount float64 = 0.0
+	var investmentAmount float64
 	expectedReturnRate := 5.5 
 	var years float64
 
-	fmt.Print("Enter an investment amount: ")
+	fmt.Print("Investment amount: ")
 	fmt.Scan(&investmentAmount)
-	fmt.Print("Enter expected return rate: ")
+
+	fmt.Print("Expected return rate: ")
 	fmt.Scan(&expectedReturnRate)
-	fmt.Print("Enter the number of years to invest: ")
+
+	fmt.Print("Years to invest: ")
 	fmt.Scan(&years)
 
 	futureValue := investmentAmount * math.Pow(1 + expectedReturnRate/100, years)
