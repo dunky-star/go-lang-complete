@@ -11,7 +11,7 @@ func main(){
 	// Assigning type explicitly to override inferred value
 	var investmentAmount float64 = 0.0
 	expectedReturnRate := 5.5 
-	years :=   10.0
+	var years float64
 
 	fmt.Print("Enter an investment amount: ")
 	fmt.Scan(&investmentAmount)
