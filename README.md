@@ -7,12 +7,11 @@
 - Real-World Applications with database connectivity.
 - Optimization Techniques: Efficient go code.
 
-
 ## To run the code
 
 ```shell
  go run [app name].go -> To run a command line app
  go mod init -> Turns a project into a module.
- go build -> To build 
- go tun . -> To run a module
+ go build -> To build
+ go run . -> To run a module
 ```
