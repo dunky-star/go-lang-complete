@@ -21,8 +21,8 @@ func main(){
 	profit := ebitda - (1 - taxRate/100)
 	ratio := ebitda / profit
 
-	fmt.Print(`The EBITDA: `, ebitda, "\n")
-	fmt.Print(`The Profit: `, profit, "\n")
-	fmt.Print(`The Ratio: `, ratio, "\n")
+	fmt.Printf("The EBITDA: %.2f\n", ebitda)
+	fmt.Printf("The Profit: %.2f\n", profit)
+	fmt.Printf("The Ratio: %.2f\n", ratio)
 
 }
