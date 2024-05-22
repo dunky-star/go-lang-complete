@@ -4,25 +4,32 @@ import "fmt"
 
 func main(){
 
-	var income float64
-	var expenses float64
-	var taxRate float64
+	//var income float64
+	//var expenses float64
+	// var taxRate float64
 
-	fmt.Print("Income: ")
-	fmt.Scan(&income)
+	income := getUserInput("Income: ")
+	expenses := getUserInput("Expenses: ")
+	taxRate := getUserInput("Tax Rate: ")
 
-	fmt.Print("Expenses: ")
-	fmt.Scan(&expenses)
-
-	fmt.Print("Tax rate: ")
-	fmt.Scan(&taxRate)
-
-    ebitda := income - expenses;
-	profit := ebitda - (1 - taxRate/100)
-	ratio := ebitda / profit
+	ebitda, profit, ratio := calculateFinancials(income, expenses, taxRate)
 
 	fmt.Printf("The EBITDA: %.2f\n", ebitda)
 	fmt.Printf("The Profit: %.2f\n", profit)
 	fmt.Printf("The Ratio: %.2f\n", ratio)
 
+}
+
+func calculateFinancials(income, expenses, taxRate float64) (float64, float64, float64) {
+	ebitda := income - expenses;
+	profit := ebitda - (1 - taxRate/100)
+	ratio := ebitda / profit
+    return ebitda, profit, ratio
+}
+
+func getUserInput (infoText string) float64{
+	var userInput float64
+	fmt.Print(infoText)
+	fmt.Scan(&userInput)
+	return userInput
 }
