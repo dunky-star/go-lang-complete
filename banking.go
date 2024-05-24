@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
@@ -21,10 +22,17 @@ func main() {
 		fmt.Println("3. Withdraw money")
 		fmt.Println("4. Exit\n")
 
-		var accountBalance = getBalanceFromFile()
+		var accountBalance, err = getBalanceFromFile()
+
+		if err != nil {
+			fmt.Println("Error")
+			fmt.Println(err)
+			fmt.Print("----------")
+			panic("Sorry, can't continue") // To terminate upon encountering an error
+		}
 
 		var choice int
-		fmt.Print("Your choice: ")
+		fmt.Print("\nYour choice: ")
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -76,9 +84,18 @@ func writeBalanceToFile(balance float64) {
 	os.WriteFile(accountBalFile, []byte(balanceText), 0644)
 }
 
-func getBalanceFromFile() float64 {
-	data, _ := os.ReadFile(accountBalFile)
+func getBalanceFromFile() (float64, error) {
+	data, err := os.ReadFile(accountBalFile)
+
+	if err != nil {
+		return 0, errors.New("Failed to read file.")
+	}
+
 	balanceText := string(data)
-	balance, _ := strconv.ParseFloat(balanceText, 64)
-	return balance
+	balance, err := strconv.ParseFloat(balanceText, 64)
+
+	if err != nil {
+		return 0, errors.New("Failed to parse stored balance value")
+	}
+	return balance, nil
 }
