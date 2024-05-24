@@ -21,7 +21,7 @@ func main() {
 		fmt.Println("3. Withdraw money")
 		fmt.Println("4. Exit\n")
 
-		var accountBalance float64 = 0
+		var accountBalance = getBalanceFromFile()
 
 		var choice int
 		fmt.Print("Your choice: ")
