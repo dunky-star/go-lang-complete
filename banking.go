@@ -28,7 +28,7 @@ func main() {
 			fmt.Println("Error")
 			fmt.Println(err)
 			fmt.Print("----------")
-			panic("Can't continue, sorry.") // To terminate upon encountering an error
+			//panic("Can't continue, sorry.") // To terminate upon encountering an error
 		}
 
 		var choice int
