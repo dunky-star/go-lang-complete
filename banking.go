@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+
+	"dunky.com/banking/file_utility"
+	"github.com/Pallinder/go-randomdata"
 )
 
 const accountBalFile = "balance.txt"
@@ -9,14 +12,15 @@ const accountBalFile = "balance.txt"
 func main() {
 
 	fmt.Println("\nWELCOME TO DUNKY BANK")
-	fmt.Println("=====================\n")
+	fmt.Println("Reach us 24/7 on ", randomdata.PhoneNumber())
+	fmt.Println("================================\n")
 
 	// For Loop is the only kind of Loop in Go but it's also flexible.
 	for { // -> Infinite Loop in Go
 
 		presentOptions()
 
-		var accountBalance, err = getFloatFromFile(accountBalFile)
+		var accountBalance, err = file_utility.GetFloatFromFile(accountBalFile)
 
 		if err != nil {
 			fmt.Println("Error")
@@ -42,7 +46,7 @@ func main() {
 			}
 			accountBalance += depositAmount
 			fmt.Print("Balance updated! New bal: ", accountBalance, "\n")
-			writeFloatToFile(accountBalance, accountBalFile)
+			file_utility.WriteFloatToFile(accountBalance, accountBalFile)
 
 		case 3:
 			var withdrawAmount float64
@@ -58,7 +62,7 @@ func main() {
 				continue
 			} else {
 				fmt.Print("Withdraw successful! New bal: ", accountBalance, "\n")
-				writeFloatToFile(accountBalance, accountBalFile)
+				file_utility.WriteFloatToFile(accountBalance, accountBalFile)
 			}
 
 		default:
