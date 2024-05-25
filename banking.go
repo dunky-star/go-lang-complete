@@ -1,10 +1,7 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 const accountBalFile = "balance.txt"
@@ -34,7 +31,7 @@ func main() {
 
 		switch choice {
 		case 1:
-			fmt.Print("Balance: ", accountBalance, "\n")
+			fmt.Print("\nBalance: ", accountBalance, "\n")
 		case 2:
 			var depositAmount float64
 			fmt.Print("Your deposit: ")
@@ -45,28 +42,28 @@ func main() {
 			}
 			accountBalance += depositAmount
 			fmt.Print("Balance updated! New bal: ", accountBalance, "\n")
-			writeBalanceToFile(accountBalance)
+			writeFloatToFile(accountBalance, accountBalFile)
 
 		case 3:
 			var withdrawAmount float64
 			fmt.Print("Enter amount to withdraw: ")
 			fmt.Scan(&withdrawAmount)
 			if withdrawAmount <= 0 {
-				fmt.Print("Invalid amount. Must be greater than 0\n")
+				fmt.Println("Invalid amount. Must be greater than 0")
 				continue
 			}
 			accountBalance -= withdrawAmount
 			if accountBalance <= 0 {
-				fmt.Print("You have insufficient account balance\n")
+				fmt.Println("You have insufficient account balance\n")
 				continue
 			} else {
 				fmt.Print("Withdraw successful! New bal: ", accountBalance, "\n")
-				writeBalanceToFile(accountBalance)
+				writeFloatToFile(accountBalance, accountBalFile)
 			}
 
 		default:
-			fmt.Print("Goodbye! ")
-			fmt.Print("Thanks for choosing our bank")
+			fmt.Println("Goodbye! ")
+			fmt.Println("Thanks for choosing our bank")
 			return
 			// break // -> To allow code outside of the loop to execute when using if condition
 
@@ -76,29 +73,8 @@ func main() {
 
 } // End of main()
 
-func writeBalanceToFile(value float64) {
-	valueText := fmt.Sprint(value)
-	os.WriteFile(accountBalFile, []byte(valueText), 0644)
-}
-
-func getFloatFromFile(fileName string) (float64, error) {
-	data, err := os.ReadFile(fileName)
-
-	if err != nil {
-		return 0, errors.New("Failed to read file.")
-	}
-
-	valueText := string(data)
-	value, err := strconv.ParseFloat(valueText, 64)
-
-	if err != nil {
-		return 0, errors.New("Failed to parse stored value")
-	}
-	return value, nil
-}
-
 func presentOptions() {
-	fmt.Println("1. Check balance")
+	fmt.Println("\n1. Check balance")
 	fmt.Println("2. Deposit money")
 	fmt.Println("3. Withdraw money")
 	fmt.Println("4. Exit\n")
