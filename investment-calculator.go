@@ -9,10 +9,9 @@
 
 // func main(){
 
-	
 // 	// Assigning type explicitly to override inferred value
 // 	var investmentAmount float64
-// 	expectedReturnRate := 5.5 
+// 	expectedReturnRate := 5.5
 // 	var years float64
 
 // 	fmt.Print("Investment amount: ")

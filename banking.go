@@ -17,12 +17,9 @@ func main() {
 	// For Loop is the only kind of Loop in Go but it's also flexible.
 	for { // -> Infinite Loop in Go
 
-		fmt.Println("1. Check balance")
-		fmt.Println("2. Deposit money")
-		fmt.Println("3. Withdraw money")
-		fmt.Println("4. Exit\n")
+		presentOptions()
 
-		var accountBalance, err = getBalanceFromFile()
+		var accountBalance, err = getFloatFromFile(accountBalFile)
 
 		if err != nil {
 			fmt.Println("Error")
@@ -55,7 +52,7 @@ func main() {
 			fmt.Print("Enter amount to withdraw: ")
 			fmt.Scan(&withdrawAmount)
 			if withdrawAmount <= 0 {
-				fmt.Print("Invalid amount. Must be greater than 0")
+				fmt.Print("Invalid amount. Must be greater than 0\n")
 				continue
 			}
 			accountBalance -= withdrawAmount
@@ -79,23 +76,30 @@ func main() {
 
 } // End of main()
 
-func writeBalanceToFile(balance float64) {
-	balanceText := fmt.Sprint(balance)
-	os.WriteFile(accountBalFile, []byte(balanceText), 0644)
+func writeBalanceToFile(value float64) {
+	valueText := fmt.Sprint(value)
+	os.WriteFile(accountBalFile, []byte(valueText), 0644)
 }
 
-func getBalanceFromFile() (float64, error) {
-	data, err := os.ReadFile(accountBalFile)
+func getFloatFromFile(fileName string) (float64, error) {
+	data, err := os.ReadFile(fileName)
 
 	if err != nil {
 		return 0, errors.New("Failed to read file.")
 	}
 
-	balanceText := string(data)
-	balance, err := strconv.ParseFloat(balanceText, 64)
+	valueText := string(data)
+	value, err := strconv.ParseFloat(valueText, 64)
 
 	if err != nil {
-		return 0, errors.New("Failed to parse stored balance value")
+		return 0, errors.New("Failed to parse stored value")
 	}
-	return balance, nil
+	return value, nil
+}
+
+func presentOptions() {
+	fmt.Println("1. Check balance")
+	fmt.Println("2. Deposit money")
+	fmt.Println("3. Withdraw money")
+	fmt.Println("4. Exit\n")
 }
