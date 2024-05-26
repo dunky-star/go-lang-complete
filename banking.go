@@ -2,18 +2,41 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"dunky.com/banking/file_utility"
 	"github.com/Pallinder/go-randomdata"
 )
 
+// struct: custom data type
+type user struct {
+	firstName string
+	lastName  string
+	birthDate string
+	createdAt time.Time
+}
+
 const accountBalFile = "balance.txt"
 
 func main() {
 
+	userFirstName := getUserData("Please enter your first name: ")
+	userLastName := getUserData("Please enter your last name: ")
+	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
+
+	var appUser user
+
+	appUser = user{
+		firstName: userFirstName,
+		lastName:  userLastName,
+		birthDate: userBirthdate,
+		createdAt: time.Now(),
+	}
+
 	fmt.Println("\nWELCOME TO DUNKY BANK")
 	fmt.Println("Reach us 24/7 on ", randomdata.PhoneNumber())
 	fmt.Println("================================\n")
+	outputUserDetail(appUser)
 
 	// For Loop is the only kind of Loop in Go but it's also flexible.
 	for { // -> Infinite Loop in Go
@@ -82,4 +105,15 @@ func presentOptions() {
 	fmt.Println("2. Deposit money")
 	fmt.Println("3. Withdraw money")
 	fmt.Println("4. Exit\n")
+}
+
+func outputUserDetail(u user) {
+	fmt.Print(u.firstName, u.lastName, u.createdAt)
+}
+
+func getUserData(promptText string) string {
+	fmt.Print(promptText)
+	var value string
+	fmt.Scan(&value)
+	return value
 }
