@@ -36,7 +36,7 @@ func main() {
 	fmt.Println("\nWELCOME TO DUNKY BANK")
 	fmt.Println("Reach us 24/7 on ", randomdata.PhoneNumber())
 	fmt.Println("================================\n")
-	outputUserDetail(appUser)
+	outputUserDetail(&appUser) // Pointer to appUser
 
 	// For Loop is the only kind of Loop in Go but it's also flexible.
 	for { // -> Infinite Loop in Go
@@ -107,8 +107,8 @@ func presentOptions() {
 	fmt.Println("4. Exit\n")
 }
 
-func outputUserDetail(u user) {
-	fmt.Print(u.firstName, u.lastName, u.createdAt)
+func outputUserDetail(u *user) { // To pass a pointer to the function
+	fmt.Println(u.firstName, u.lastName, u.createdAt)
 }
 
 func getUserData(promptText string) string {
