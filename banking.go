@@ -16,6 +16,17 @@ type user struct {
 	createdAt time.Time
 }
 
+// Constructor function
+func newUser(firstName, lastName, birthDate string) user {
+	return user{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}
+
+}
+
 const accountBalFile = "balance.txt"
 
 func main() {
@@ -26,12 +37,7 @@ func main() {
 
 	var appUser user
 
-	appUser = user{
-		firstName: userFirstName,
-		lastName:  userLastName,
-		birthDate: userBirthdate,
-		createdAt: time.Now(),
-	}
+	appUser = newUser(userFirstName, userLastName, userBirthdate)
 
 	fmt.Println("\nWELCOME TO DUNKY BANK")
 	fmt.Println("Reach us 24/7 on ", randomdata.PhoneNumber())
