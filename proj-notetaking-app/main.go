@@ -2,11 +2,10 @@ package main
 
 import (
 	"bufio"
+	"dunky.com/note/note"
 	"fmt"
 	"os"
 	"strings"
-
-	"dunky.com/note/note"
 )
 
 // Main function
@@ -21,6 +20,14 @@ func main() {
 		return
 	}
 	userNote.Display() // Calling display func from note package
+	err = userNote.Save()
+
+	if err != nil {
+		fmt.Println("Saving the note failed.")
+		return
+	}
+
+	fmt.Println("Saving the note succeeded!")
 } // End of main function
 
 func getNoteData() (string, string) {
@@ -32,8 +39,8 @@ func getNoteData() (string, string) {
 
 }
 
-func getUserInput(promptText string) string {
-	fmt.Print(promptText)
+func getUserInput(promptText string) string { // Handling long string
+	fmt.Printf("%v ", promptText)
 	reader := bufio.NewReader(os.Stdin)
 	text, err := reader.ReadString('\n')
 
