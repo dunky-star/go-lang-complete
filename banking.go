@@ -1,36 +1,12 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"time"
 
 	"dunky.com/banking/file_utility"
+	"dunky.com/banking/user"
 	"github.com/Pallinder/go-randomdata"
 )
-
-// struct: custom data type
-type user struct {
-	firstName string
-	lastName  string
-	birthDate string
-	createdAt time.Time
-}
-
-// Constructor function
-func newUser(firstName, lastName, birthDate string) (*user, error) {
-	// Constructor helps us to perform validation
-	if firstName == "" || lastName == "" || birthDate == "" {
-		return nil, errors.New("First name, last name and birthdate are required")
-	}
-	return &user{
-		firstName: firstName,
-		lastName:  lastName,
-		birthDate: birthDate,
-		createdAt: time.Now(),
-	}, nil
-
-}
 
 const accountBalFile = "balance.txt"
 
@@ -40,9 +16,9 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var appUser *user
+	var appUser *user.User
 
-	appUser, err := newUser(userFirstName, userLastName, userBirthdate)
+	appUser, err := user.New(userFirstName, userLastName, userBirthdate)
 
 	if err != nil {
 		fmt.Println(err)
@@ -52,7 +28,7 @@ func main() {
 	fmt.Println("\nWELCOME TO DUNKY BANK")
 	fmt.Println("Reach us 24/7 on ", randomdata.PhoneNumber())
 	fmt.Println("================================\n")
-	outputUserDetail(appUser) // Pointer to appUser
+	appUser.OutputUserDetail() // Call to output function in User struct
 
 	// For Loop is the only kind of Loop in Go but it's also flexible.
 	for { // -> Infinite Loop in Go
@@ -123,13 +99,9 @@ func presentOptions() {
 	fmt.Println("4. Exit\n")
 }
 
-func outputUserDetail(u *user) { // To pass a pointer to the function
-	fmt.Println(u.firstName, u.lastName, u.createdAt)
-}
-
 func getUserData(promptText string) string {
 	fmt.Print(promptText)
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 	return value
 }
