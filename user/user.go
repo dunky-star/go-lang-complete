@@ -18,7 +18,7 @@ type User struct {
 type Admin struct {
 	email    string
 	password string
-	User     // Embedding
+	User     User // Embedding
 }
 
 // Constructor function
