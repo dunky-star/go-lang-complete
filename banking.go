@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -17,13 +18,17 @@ type user struct {
 }
 
 // Constructor function
-func newUser(firstName, lastName, birthDate string) user {
-	return user{
+func newUser(firstName, lastName, birthDate string) (*user, error) {
+	// Constructor helps us to perform validation
+	if firstName == "" || lastName == "" || birthDate == "" {
+		return nil, errors.New("First name, last name and birthdate are required")
+	}
+	return &user{
 		firstName: firstName,
 		lastName:  lastName,
 		birthDate: birthDate,
 		createdAt: time.Now(),
-	}
+	}, nil
 
 }
 
@@ -35,14 +40,19 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var appUser user
+	var appUser *user
 
-	appUser = newUser(userFirstName, userLastName, userBirthdate)
+	appUser, err := newUser(userFirstName, userLastName, userBirthdate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	fmt.Println("\nWELCOME TO DUNKY BANK")
 	fmt.Println("Reach us 24/7 on ", randomdata.PhoneNumber())
 	fmt.Println("================================\n")
-	outputUserDetail(&appUser) // Pointer to appUser
+	outputUserDetail(appUser) // Pointer to appUser
 
 	// For Loop is the only kind of Loop in Go but it's also flexible.
 	for { // -> Infinite Loop in Go
