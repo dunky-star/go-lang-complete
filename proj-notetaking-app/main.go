@@ -2,10 +2,11 @@ package main
 
 import (
 	"bufio"
-	"dunky.com/note/note"
 	"fmt"
 	"os"
 	"strings"
+
+	"dunky.com/proj-notetaking-app/note"
 )
 
 // Main function
