@@ -7,12 +7,22 @@ import (
 	"strings"
 
 	"dunky.com/proj-notetaking-app/note"
+	"dunky.com/proj-notetaking-app/todo"
 )
 
 // Main function
 func main() {
 
 	title, content := getNoteData()
+
+	todoText := getUserInput("Todo text: ")
+
+	todo, err := todo.New(todoText)
+
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
 
 	userNote, err := note.New(title, content)
 
@@ -31,6 +41,11 @@ func main() {
 	fmt.Println("Saving the note succeeded!")
 } // End of main function
 
+func getTodoData() string {
+	text := getUserInput("Todo text: ")
+	return text
+}
+
 func getNoteData() (string, string) {
 	title := getUserInput("Note Title: ")
 
@@ -38,6 +53,18 @@ func getNoteData() (string, string) {
 
 	return title, content
 
+}
+
+func saveData(data saver) error {
+	err := data.save()
+
+	if err != nil {
+		fmt.Print("Saving data failed")
+		return err
+	}
+
+	fmt.Print("Saving data succeeded!")
+	return nil
 }
 
 func getUserInput(promptText string) string { // Handling long string
@@ -52,4 +79,8 @@ func getUserInput(promptText string) string { // Handling long string
 	text = strings.TrimSuffix(text, "\r")
 
 	return text
+}
+
+type saver interface {
+	save() error
 }
