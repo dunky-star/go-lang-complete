@@ -31,7 +31,16 @@ func main() {
 		return
 	}
 
-	userNote.Display() // Calling display func from note package
+	err = outputData(userNote) // Calling display func from note package
+
+	if err != nil {
+		return
+	}
+	err = outputData(todo)
+
+	if err != nil {
+		return
+	}
 
 	err = saveData(todo)
 	if err != nil {
@@ -86,7 +95,21 @@ func getUserInput(promptText string) string { // Handling long string
 	return text
 }
 
+func outputData(data outputtable) error {
+	data.Display()
+	return saveData(data)
+}
+
 // Interface -> Contract
 type saver interface {
 	Save() error
+}
+
+// type displayer interface {
+// 	Display()
+// }
+
+type outputtable interface {
+	saver
+	Display()
 }
