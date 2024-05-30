@@ -30,15 +30,19 @@ func main() {
 		fmt.Print(err)
 		return
 	}
-	userNote.Display() // Calling display func from note package
-	err = userNote.Save()
 
+	userNote.Display() // Calling display func from note package
+
+	err = saveData(todo)
 	if err != nil {
-		fmt.Println("Saving the note failed.")
 		return
 	}
 
-	fmt.Println("Saving the note succeeded!")
+	err = saveData(userNote)
+	if err != nil {
+		return
+	}
+
 } // End of main function
 
 func getTodoData() string {
@@ -55,8 +59,9 @@ func getNoteData() (string, string) {
 
 }
 
+// Interface implementation
 func saveData(data saver) error {
-	err := data.save()
+	err := data.Save()
 
 	if err != nil {
 		fmt.Print("Saving data failed")
@@ -81,6 +86,7 @@ func getUserInput(promptText string) string { // Handling long string
 	return text
 }
 
+// Interface -> Contract
 type saver interface {
-	save() error
+	Save() error
 }
