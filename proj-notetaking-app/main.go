@@ -109,7 +109,13 @@ type saver interface {
 // 	Display()
 // }
 
+// Interface Embedding in Go
 type outputtable interface {
 	saver
 	Display()
+}
+
+// Generics in Go
+func add[T int | float64 | string](a, b T) T {
+	return a + b
 }
