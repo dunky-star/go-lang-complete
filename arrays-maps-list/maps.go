@@ -3,9 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	website := map[string]string{
+	websites := map[string]string{
 		"Google": "https://google.com",
 		"Amazon": "https://aws.com",
 	}
-	fmt.Println(website)
+	websites["LinkedIn"] = "https://linkedin.com" // Adding an element to a map
+	fmt.Println(websites)
 }
