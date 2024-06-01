@@ -18,7 +18,10 @@ func main() {
 	fmt.Println("Quad numbers from Anonymous -> ", quadTransform)
 	fmt.Println("Factorial without recursion -> ", fact)
 	fmt.Println("Factorial with recursion -> ", rfact)
-
+	fmt.Println("The sum of array elements  in numbers = ", sumUp(numbers))
+	fmt.Println("The sum of any elements = ", sumArbitrary(10, 1000, 39, 40, 20, 1))
+	anotherSum := sumArbitrary(numbers...) // Splitting slcies into parameter values.
+	fmt.Println("Splitting slices and summing up= ", anotherSum)
 }
 
 // Write a function to double the int values in a slice and return the doubled slice.
@@ -74,4 +77,24 @@ func recursiveFactorial(n int) int {
 		return 1
 	}
 	return n * recursiveFactorial(n-1)
+}
+
+// Write a function to sum up all the integer array elements
+func sumUp(numbers []int) int {
+	sum := 0
+
+	for _, value := range numbers {
+		sum += value
+	}
+	return sum
+}
+
+// Variadic function to sum up arbitrary elements
+func sumArbitrary(numbers ...int) int {
+	sum := 0
+
+	for _, value := range numbers {
+		sum += value
+	}
+	return sum
 }
