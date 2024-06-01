@@ -3,6 +3,13 @@ package main
 import "fmt"
 
 func main() {
+	//Slice
+	userNames := make([]string, 2, 5)
+	userNames[0] = "Julie"
+	userNames[1] = "Cathy"
+	userNames = append(userNames, "Duncan", "Tonny", "Christine", "Palm")
+
+	// Map
 	websites := map[string]string{
 		"Google":  "https://google.com",
 		"Amazon":  "https://aws.com",
@@ -24,10 +31,16 @@ func main() {
 	fmt.Println(courseRatings)
 
 	// Using For Loop with Arrays, Slices and Maps
-	for i, val := range websites {
+	for i, val := range userNames {
 		//...
-		fmt.Println(i)
-		fmt.Println(val)
+		fmt.Println("Index: ", i)
+		fmt.Println("Value: ", val)
+	}
+
+	for key, value := range websites {
+		//...
+		fmt.Println("Key: ", key)
+		fmt.Println("Value: ", value)
 	}
 
 }
