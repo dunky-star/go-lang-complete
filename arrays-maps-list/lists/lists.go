@@ -1,4 +1,4 @@
-package lists
+package main
 
 import "fmt"
 
@@ -9,7 +9,12 @@ type Product struct {
 }
 
 func main() {
-	hobbies := [3]string{"Motorsport", "Dancing", "Scientific Journals"}
+	hobbies := make([]string, 2, 4) // For efficient memory management
+	hobbies[0] = "Coding"
+	hobbies[1] = "Playing Piano"
+	hobbies = append(hobbies, "Motorsport")
+	hobbies = append(hobbies, "Dancing", "Scientific Journals", "Aurora Gyming")
+
 	prices := []float64{10.5, 9.2, 11.4, 3.5, 20.1, 6.6, 100.1, 200.5, 30.5, 40.0}
 	discountPrices := []float64{1.5, 2.2, 4.5, 6.6}    // Dynamic arrays
 	updatedPrices := append(prices, discountPrices...) // Unpacking list
