@@ -61,7 +61,7 @@ func createTransformer(factor int) func(int) int {
 	}
 }
 
-// Claculating factorial without recursion
+// Calculating factorial without recursion
 func numFactorial(number int) int {
 	result := 1
 
