@@ -5,11 +5,19 @@ import "fmt"
 func main() {
 	numbers := []int{2, 12, 10, 40, 80, 100}
 	doubled := doubbleNumbers(&numbers)
-	doubledTransform := transformNumbers(&numbers, double)
-	tripleTransform := transformNumbers(&numbers, triple)
+	fact := numFactorial(5)
+	rfact := recursiveFactorial(5)
+	quadTransform := transformNumbers(&numbers, func(number int) int { return number * 4 }) // Anonymous function
+	doubleClosure := createTransformer(2)
+	tripleTransformer := createTransformer(3)
+	doubledTransform := transformNumbers(&numbers, doubleClosure)
+	tripleTransform := transformNumbers(&numbers, tripleTransformer)
 	fmt.Println("Doubled numbers func -> ", doubled)
 	fmt.Println("Doubled numbers transorm -> ", doubledTransform)
 	fmt.Println("Tripled numbers transorm -> ", tripleTransform)
+	fmt.Println("Quad numbers from Anonymous -> ", quadTransform)
+	fmt.Println("Factorial without recursion -> ", fact)
+	fmt.Println("Factorial with recursion -> ", rfact)
 
 }
 
@@ -41,4 +49,29 @@ func double(number int) int {
 // Utility func 2
 func triple(number int) int {
 	return number * 3
+}
+
+// Closure concept -> Factory method
+func createTransformer(factor int) func(int) int {
+	return func(number int) int {
+		return number * factor
+	}
+}
+
+// Claculating factorial without recursion
+func numFactorial(number int) int {
+	result := 1
+
+	for i := 1; i <= number; i++ {
+		result = result * i
+	}
+	return result
+}
+
+// Recursion  -> Calculating factorial of a number with recursion
+func recursiveFactorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * recursiveFactorial(n-1)
 }
