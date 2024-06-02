@@ -1,11 +1,10 @@
 package prices
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 
 	"dunky.com/price-calculator/conversion"
+	"dunky.com/price-calculator/filemanager"
 )
 
 type TaxIncludedPriceJob struct {
@@ -38,23 +37,9 @@ func (job *TaxIncludedPriceJob) Process() {
 
 func (job *TaxIncludedPriceJob) loadData() {
 	// Reading text data from file
-	file, err := os.Open("prices.txt")
+	lines, err := filemanager.ReadLines("prices.txt")
 	if err != nil {
-		fmt.Println("Could not open file.")
-		fmt.Println(err)
-		return
-	}
-
-	var lines []string
-
-	sc := bufio.NewScanner(file)
-	for sc.Scan() {
-		lines = append(lines, sc.Text())
-	}
-	err = sc.Err()
-	if err != nil {
-		fmt.Println("Reading the file content failed.")
-		file.Close()
+		fmt.Print(err)
 		return
 	}
 
@@ -63,10 +48,8 @@ func (job *TaxIncludedPriceJob) loadData() {
 
 	if err != nil {
 		fmt.Print(err)
-		file.Close()
 		return
 	}
 
 	job.InputPrices = prices
-	file.Close()
 }
