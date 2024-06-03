@@ -26,7 +26,7 @@ func (cmd CMDManager) ReadLines() ([]string, error) {
 }
 
 func (cmd CMDManager) WriteResult(data interface{}) error {
-	fmt.Print(data)
+	fmt.Println(data)
 	return nil
 }
 
