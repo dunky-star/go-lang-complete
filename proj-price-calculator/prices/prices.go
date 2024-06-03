@@ -24,11 +24,12 @@ func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxInclud
 	}
 }
 
-func (job *TaxIncludedPriceJob) Process(doneChan chan bool) {
+func (job *TaxIncludedPriceJob) Process(doneChan chan bool, errorChan chan error) {
 
 	err := job.loadData() // Loading data read from file
 	if err != nil {
-		//return err
+		errorChan <- err
+		return
 	}
 
 	result := make(map[string]string)
